@@ -6,14 +6,13 @@
 #    By: skrairab <Marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/22 22:55:16 by skrairab          #+#    #+#              #
-#    Updated: 2022/09/25 20:26:39 by skrairab         ###   ########.fr        #
+#    Updated: 2022/09/25 21:46:34 by skrairab         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS = so_long.c\
 		ft_opened.c\
-		ft_flodfill.c
-
+		ft_floodfill.c
 
 
 NAME = so_long
@@ -26,16 +25,23 @@ CC_FLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
-$(NAME):
-	$(CC) -g (CC_FLAGS) -o $(NAME) $(SRCS)
+LIBDIR = ./Libftc
 
-clean: rm -rf $(NAME)
-		rm -rf *.o
+INCLUDE = -Llibftc -lft
+
+$(NAME):
+	make -C $(LIBDIR)
+	$(CC) -g $(CC_FLAGS) -o $(NAME) $(SRCS) $(INCLUDE)
+
+
+clean:
+	   rm -rf *.o
+		make -C $(LIBDIR) clean
 
 fclean: clean
 		rm -rf $(NAME)
-		rm -rf *.o
 		rm -rf so_long
+		make -C $(LIBDIR) fclean
 
 re: fclean all
 

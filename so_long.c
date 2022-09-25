@@ -6,7 +6,7 @@
 /*   By: skrairab <Marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 15:52:56 by skrairab          #+#    #+#             */
-/*   Updated: 2022/09/25 18:07:14 by skrairab         ###   ########.fr       */
+/*   Updated: 2022/09/25 22:55:26 by skrairab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,10 @@ int		main(int ac, char **av)
 	int		i;
 	char	**arr;
 	int		j;
-	int		p;
-	int		e;
-	int		c;
-	int		k;
-
 
 	ft_checkpath(ac, av);
 	ft_getarr(av);
+	ft_check_ac(ac, av);
 
 	if (ac < 2 )
 		write(2, "agument is not enought %s\n", 21);
@@ -40,39 +36,35 @@ int		main(int ac, char **av)
 		write(2, "File name is incorrect. Please try again!. %s\n", 42);
 
 	i = ft_opened(av[1]);
-	printf("i = %d\n",i);
+	//printf("i = %d\n",i);
 	if (i == 0)
 		exit (0);
-	printf("Hello \n");
+	//printf("Hello \n");
 	arr = malloc(sizeof(char *)*(i+1));
 	
 	arr[i+1] = NULL;
-	printf("Hello2 \n");
+	//printf("Hello2 \n");
 	
 	opened = open(av[1], O_RDONLY);
 	j = 1;
-	printf("opened = %d\n", opened);
+	//printf("opened = %d\n", opened);
 	arr[0] = get_next_line(opened);
 	while (j <= i)
 	{
 		arr[j] = get_next_line(opened);
 		j++;
 	}
-	ft_countpec(arr, i, 1);
-	ft_countpec(arr, i, 2);
-	ft_countpec(arr, i, 3);
+	ft_countpec(arr, 1);
+	ft_countpec(arr, 2);
+	ft_countpec(arr, 3);
 
-	
 	if (ft_checkwallx(arr, i) == 0 )
-		write (2, "The wall does not complete! \n", 30);
-
+		write (2, "The wall at x does not complete!\n", 333);
 	if (ft_checkwally(arr, i) == 0 )
-		write (2, "The wall does not complete! \n", 30);
-
-
+		write (2, "The wall at y does not complete!\n", 33);
 	if (ft_checkrec(arr, i) == 0)
-		write (2, "The map is not rectangular!", 27);
-	
+		write (2, "The map is not rectangular!\n", 28);
+	ft_dupmap(arr,i);
 	return (0);
 }
 
@@ -103,8 +95,6 @@ char		**ft_getarr(char **av)
 char		ft_checkpath(int ac, char **av)
 {
 	char	*check_path;
-	int		opened;
-	int		i;
 
 	if (ac < 2 )
 		write(2, "agument is not enought %s\n", 21);
@@ -119,7 +109,7 @@ char		ft_checkpath(int ac, char **av)
 	return (0);
 }
 
-int		ft_countpec(char **arr, int i, int mode)
+int		ft_countpec(char **arr, int mode)
 {
 	int		k;
 	int		j;
@@ -148,32 +138,32 @@ int		ft_countpec(char **arr, int i, int mode)
 int		ft_checkwallx(char **arr, int i)
 {
 		int		k;
-		int		len;
+		int		lenx;
 
 		k = 0;
-		len = ft_lenx(arr[0]);
-		printf("len = %d\n",len);
-		printf("arr [0][k0] = %d\n",arr[0][0]);
-		printf("arr [5][k0] = %s\n",arr[4]);
-		printf("i  = %d\n",i);
+		lenx = ft_lenx(arr[0]);
+		// printf("len = %d\n",len);
+		// printf("arr [0][k0] = %d\n",arr[0][0]);
+		// printf("arr [5][k0] = %s\n",arr[4]);
+		// printf("i  = %d\n",i);
 
-		while (k < len)
+		while (k < lenx)
 		{
 			if (arr[0][k] != '1')
 			{
-				printf("k = %d\n",k);
-				printf("arr1 = %d\n",arr[0][k]);
-				printf("arr2 = %d\n",arr[i-1][k]);
+				//printf("k = %d\n",k);
+				//printf("arr1 = %d\n",arr[0][k]);
+				//printf("arr2 = %d\n",arr[i-1][k]);
 				return (0);
 			}
 			k++;
 		}
 		k = 0;
-		while (k < len)
+		while (k < lenx)
 		{
 			if (arr[i-1][k] != '1')
 			{
-				printf("j = %d\n",k);
+				//printf("j = %d\n",k);
 				return (0);
 			}
 			k++;
@@ -184,31 +174,33 @@ int		ft_checkwallx(char **arr, int i)
 int		ft_checkwally(char **arr, int i)
 {
 		int		j;
-		int		len;
+		int		lenx;
 
 		j = 0;
-		len = ft_lenx(arr[0]);
-		printf("len = %d\n",len);
-		printf("arr [0][k0] = %d\n",arr[0][0]);
-		printf("arr [5][k0] = %s\n",arr[4]);
-		printf("i  = %d\n",i);
-
+		//printf("iy = %d\n", i);
+		lenx = ft_lenx(arr[0]);
+		//printf("len = %d\n",len);
+		//printf("arr [0][k0] = %d\n",arr[0][0]);
+		//printf("arr [5][k0] = %s\n",arr[4]);
+		//printf("i  = %d\n",i);
 		while (j < i)
 		{
 			if (arr[j][0] != '1') 
 			{
-				printf("j = %d\n",j);
+				//printf("jy = %d\n",j);
 				return (0);
 			}
 			j++;
 		}
 		j = 0;
-		printf("j = %d\n",j);
+		//printf("jy = %d\n",j);
+		//printf("len = %d\n",len);
 		while (j < i)
 		{
-			if (arr[j][len] != '1')
+			//printf("arr(y) = %c\n", arr[j][len-1]);
+			if (arr[j][lenx-1] != '1')
 			{
-				printf("j = %d\n",j);
+				//printf("jy = %d\n",j);
 				return (0);
 			}
 			j++;
@@ -224,13 +216,13 @@ int		ft_checkrec(char **arr, int i)
 
 		j = 0;
 		k = 0;
-		printf("i_rec = %d\n", i);
+		//printf("i_rec = %d\n", i);
 		while (j < i)
 		{
 			tmp = ft_lenx(arr[0]);
 			len_rec = ft_lenx(arr[j]);
-			printf("len1 = %d\n",tmp);
-			printf("len2 + 1 = %d\n", (len_rec));
+			//printf("len1 = %d\n",tmp);
+			//printf("len2 + 1 = %d\n", (len_rec));
 			if (tmp != len_rec)
 				return (0);
 			j++;

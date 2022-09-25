@@ -6,7 +6,7 @@
 /*   By: skrairab <Marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 23:20:35 by skrairab          #+#    #+#             */
-/*   Updated: 2022/09/25 18:02:36 by skrairab         ###   ########.fr       */
+/*   Updated: 2022/09/25 22:30:32 by skrairab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,3 +26,6 @@ int		ft_floodfill(char **arr, int x,int y)
 	ft_floodfill(arr, x, y + 1);
 	return (1);
 }
+
+
+
