@@ -6,7 +6,7 @@
 /*   By: skrairab <Marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 15:52:56 by skrairab          #+#    #+#             */
-/*   Updated: 2022/09/25 22:55:26 by skrairab         ###   ########.fr       */
+/*   Updated: 2022/09/25 23:54:33 by skrairab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,22 @@
 int		main(int ac, char **av)
 {
 	char	*check_path;
-	int		opened;
+	//int		opened;
 	int		i;
 	char	**arr;
-	int		j;
+	//int		j;
+	int		y;
+	char	**arr_tmp;
 
 	ft_checkpath(ac, av);
-	ft_getarr(av);
+	ft_check_ac(ac, av);
+	arr = ft_getarr(av);
+	y = 0;
+	while (arr[y])
+	{
+		printf("arr = %s\n", arr[y]);
+		y++;
+	}
 	ft_check_ac(ac, av);
 
 	if (ac < 2 )
@@ -36,24 +45,6 @@ int		main(int ac, char **av)
 		write(2, "File name is incorrect. Please try again!. %s\n", 42);
 
 	i = ft_opened(av[1]);
-	//printf("i = %d\n",i);
-	if (i == 0)
-		exit (0);
-	//printf("Hello \n");
-	arr = malloc(sizeof(char *)*(i+1));
-	
-	arr[i+1] = NULL;
-	//printf("Hello2 \n");
-	
-	opened = open(av[1], O_RDONLY);
-	j = 1;
-	//printf("opened = %d\n", opened);
-	arr[0] = get_next_line(opened);
-	while (j <= i)
-	{
-		arr[j] = get_next_line(opened);
-		j++;
-	}
 	ft_countpec(arr, 1);
 	ft_countpec(arr, 2);
 	ft_countpec(arr, 3);
@@ -64,7 +55,16 @@ int		main(int ac, char **av)
 		write (2, "The wall at y does not complete!\n", 33);
 	if (ft_checkrec(arr, i) == 0)
 		write (2, "The map is not rectangular!\n", 28);
-	ft_dupmap(arr,i);
+	arr_tmp = ft_getarr(av);
+	y = 0;
+	while (arr_tmp[y])
+	{
+		printf("arr_dupmap = %s\n", arr[y]);
+		y++;
+	}
+	ทำ function หาตำแหน่ง P ก่อนส่งเข้า floodfill
+	ft_floodfill(arr_tmp, x, y);
+
 	return (0);
 }
 
@@ -142,18 +142,10 @@ int		ft_checkwallx(char **arr, int i)
 
 		k = 0;
 		lenx = ft_lenx(arr[0]);
-		// printf("len = %d\n",len);
-		// printf("arr [0][k0] = %d\n",arr[0][0]);
-		// printf("arr [5][k0] = %s\n",arr[4]);
-		// printf("i  = %d\n",i);
-
 		while (k < lenx)
 		{
 			if (arr[0][k] != '1')
 			{
-				//printf("k = %d\n",k);
-				//printf("arr1 = %d\n",arr[0][k]);
-				//printf("arr2 = %d\n",arr[i-1][k]);
 				return (0);
 			}
 			k++;
@@ -163,7 +155,6 @@ int		ft_checkwallx(char **arr, int i)
 		{
 			if (arr[i-1][k] != '1')
 			{
-				//printf("j = %d\n",k);
 				return (0);
 			}
 			k++;
@@ -177,30 +168,20 @@ int		ft_checkwally(char **arr, int i)
 		int		lenx;
 
 		j = 0;
-		//printf("iy = %d\n", i);
 		lenx = ft_lenx(arr[0]);
-		//printf("len = %d\n",len);
-		//printf("arr [0][k0] = %d\n",arr[0][0]);
-		//printf("arr [5][k0] = %s\n",arr[4]);
-		//printf("i  = %d\n",i);
 		while (j < i)
 		{
 			if (arr[j][0] != '1') 
 			{
-				//printf("jy = %d\n",j);
 				return (0);
 			}
 			j++;
 		}
 		j = 0;
-		//printf("jy = %d\n",j);
-		//printf("len = %d\n",len);
 		while (j < i)
 		{
-			//printf("arr(y) = %c\n", arr[j][len-1]);
 			if (arr[j][lenx-1] != '1')
 			{
-				//printf("jy = %d\n",j);
 				return (0);
 			}
 			j++;
@@ -216,13 +197,10 @@ int		ft_checkrec(char **arr, int i)
 
 		j = 0;
 		k = 0;
-		//printf("i_rec = %d\n", i);
 		while (j < i)
 		{
 			tmp = ft_lenx(arr[0]);
 			len_rec = ft_lenx(arr[j]);
-			//printf("len1 = %d\n",tmp);
-			//printf("len2 + 1 = %d\n", (len_rec));
 			if (tmp != len_rec)
 				return (0);
 			j++;

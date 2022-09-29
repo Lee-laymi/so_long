@@ -6,7 +6,7 @@
 /*   By: skrairab <Marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 13:51:01 by skrairab          #+#    #+#             */
-/*   Updated: 2022/09/25 22:54:28 by skrairab         ###   ########.fr       */
+/*   Updated: 2022/09/25 23:51:19 by skrairab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,16 @@ void		ft_dupmap(char **arr, int i)
 {
 	char	**arr_tmp;
 	int		lenx;
+	int		y;
 
-
-	arr_tmp = arr;
+	y = 0;
+	arr_tmp = ft_getarr(arr);
 	lenx = ft_lenx(arr[0]);
-	printf("arr_tmp = %c/n", arr_tmp[i][lenx-1]);
-
-
-
-
+	while (arr[y])
+	{
+		printf("arr_dupmap = %s\n", arr[y]);
+		y++;
+	}
 }
 
 
