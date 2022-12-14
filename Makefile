@@ -3,17 +3,21 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: skrairab <Marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: ami <ami@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/22 22:55:16 by skrairab          #+#    #+#              #
-#    Updated: 2022/09/25 21:46:34 by skrairab         ###   ########.fr        #
+#    Updated: 2022/12/14 22:14:41 by ami              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS = so_long.c\
 		ft_opened.c\
-		ft_floodfill.c
-
+		ft_floodfill.c\
+		checker1.c\
+		ft_checker2.c\
+		create_map.c\
+		ft_getnextline/get_next_line_utils.c\
+		ft_getnextline/get_next_line.c\
 
 NAME = so_long
 
@@ -23,15 +27,18 @@ CC = gcc
 
 CC_FLAGS = -Wall -Wextra -Werror
 
+LIBDIR = ./Libfts
+
+LIBPRINTF = ./ft_printf
+
+INCLUDE = -L Libfts -lft -L ft_printf -lftprintf
+
 all: $(NAME)
 
-LIBDIR = ./Libftc
-
-INCLUDE = -Llibftc -lft
-
-$(NAME):
+$(NAME): $(OBJS)
 	make -C $(LIBDIR)
-	$(CC) -g $(CC_FLAGS) -o $(NAME) $(SRCS) $(INCLUDE)
+	make -C $(LIBPRINTF)
+	$(CC) -g $(CC_FLAGS) $(OBJS) -o $(NAME) $(INCLUDE)
 
 
 clean:
