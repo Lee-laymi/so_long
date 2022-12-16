@@ -6,7 +6,7 @@
 /*   By: ami <ami@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:08:58 by ami               #+#    #+#             */
-/*   Updated: 2022/12/14 22:05:58 by ami              ###   ########.fr       */
+/*   Updated: 2022/12/16 20:51:13 by ami              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,27 @@
 char	**ft_createmap(char **av, t_map *map)
 {
 	int		opened;
+	t_dim	dim;
 	//int		i;
 	int		j;
 
-	map->height = ft_opened(av[1]);
+	dim.height = ft_opened(av[1]);
 	//printf("i = %d\n", i);
-	if (map->height == 0)
+    if (dim.height == 0)
 		exit (0);
-	map->map = malloc(sizeof(char *) * (map->height + 1));
+	map->map = malloc(sizeof(char *) * (dim.height + 1));
 	opened = open(av[1], O_RDONLY);
-	j = 1;
-	map->map[0] = get_next_line(opened);
-	while (j <= map->height)
+	if (opened < 0)
 	{
-		map->map[j] = get_next_line(opened);
+		//error
+		exit(0);
+	}
+	j = 0;
+	map->map[j] = get_next_line(opened);
+	while (map->map[j])
+	{
 		j++;
+		map->map[j] = get_next_line(opened);
 	}
 	return (map->map);
 }
@@ -47,8 +53,26 @@ void	ft_freemap(char **map)
     exit(0);
 }
 
-void    ft_checkmap(t_map map_tmp)
+void    ft_checkmap(char **map_tmp, t_dim dim)
 {
-    ft_checkpec(map_tmp.map);
-    ft_checkwallx(map_tmp.map, map_tmp.height);
+	if (ft_checkpec(map_tmp) != 1)
+		{
+			ft_freemap(map_tmp);
+			exit (0);
+		}
+	else if (ft_checkwallx(map_tmp, dim.height) != 1)
+		{
+			ft_freemap(map_tmp);
+			exit (0);
+		}
+	else if (ft_checkwally(map_tmp, dim.width) != 1)
+		{
+			ft_freemap(map_tmp);
+			exit (0);
+		}
+	else if (ft_checkrec(map_tmp, dim.height) != 1)
+		{
+			ft_freemap(map_tmp);
+			exit (0);
+		}
 }

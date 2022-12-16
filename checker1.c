@@ -6,7 +6,7 @@
 /*   By: ami <ami@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 17:11:28 by ami               #+#    #+#             */
-/*   Updated: 2022/12/14 21:18:58 by ami              ###   ########.fr       */
+/*   Updated: 2022/12/16 14:33:01 by ami              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,20 @@ int	ft_countpec(char **arr, int mode)
 int	ft_checkpec(char **map_tmp)
 {
     if (ft_countpec(map_tmp, 1) != 1 )
+	{
+		write(2, "Map have no P%s\n", 13);
         ft_freemap(map_tmp);
+	}
 	if (ft_countpec(map_tmp, 2) != 1 )
+	{
+		write(2, "Map have no E%s\n", 13);
         ft_freemap(map_tmp);
+	}
 	if (ft_countpec(map_tmp, 3) < 1 )
+    {
+		write(2, "Map have no C%s\n", 13);
         ft_freemap(map_tmp);
+	}
     else
         return (1);
 }

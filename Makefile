@@ -6,7 +6,7 @@
 #    By: ami <ami@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/22 22:55:16 by skrairab          #+#    #+#              #
-#    Updated: 2022/12/14 22:14:41 by ami              ###   ########.fr        #
+#    Updated: 2022/12/15 21:38:12 by ami              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ SRCS = so_long.c\
 		ft_opened.c\
 		ft_floodfill.c\
 		checker1.c\
-		ft_checker2.c\
+		checker2.c\
 		create_map.c\
 		ft_getnextline/get_next_line_utils.c\
 		ft_getnextline/get_next_line.c\
