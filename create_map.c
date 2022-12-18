@@ -6,13 +6,15 @@
 /*   By: ami <ami@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:08:58 by ami               #+#    #+#             */
-/*   Updated: 2022/12/16 20:51:13 by ami              ###   ########.fr       */
+/*   Updated: 2022/12/18 17:30:06 by ami              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "so_long.h"
 
-char	**ft_createmap(char **av, t_map *map)
+
+
+char	**ft_create_tmpmap(char **av, t_map *map)
 {
 	int		opened;
 	t_dim	dim;
@@ -22,57 +24,83 @@ char	**ft_createmap(char **av, t_map *map)
 	dim.height = ft_opened(av[1]);
 	//printf("i = %d\n", i);
     if (dim.height == 0)
-		exit (0);
-	map->map = malloc(sizeof(char *) * (dim.height + 1));
-	opened = open(av[1], O_RDONLY);
-	if (opened < 0)
 	{
-		//error
-		exit(0);
+		write(2, "Map Error\n", 10);
+		exit (0);
 	}
+	map->tmp_map = malloc(sizeof(char *) * (dim.height + 1));
+	opened = open(av[1], O_RDONLY);
 	j = 0;
-	map->map[j] = get_next_line(opened);
-	while (map->map[j])
+	map->tmp_map[j] = get_next_line(opened);
+	while (map->tmp_map[j])
 	{
 		j++;
-		map->map[j] = get_next_line(opened);
+		map->tmp_map[j] = get_next_line(opened);
 	}
-	return (map->map);
+	map->tmp_map[j] = NULL;
+	return (map->tmp_map);
 }
 
-void	ft_freemap(char **map)
+char	**ft_create_realmap(char **av, t_map *map)
+{
+	int		opened;
+	t_dim	dim;
+	//int		i;
+	int		j;
+
+	dim.height = ft_opened(av[1]);
+	//printf("i = %d\n", i);
+    if (dim.height == 0)
+	{
+		write(2, "Map Error\n", 10);
+		exit (0);
+	}
+	map->real_map = malloc(sizeof(char *) * (dim.height + 1));
+	opened = open(av[1], O_RDONLY);
+	j = 0;
+	map->real_map[j] = get_next_line(opened);
+	while (map->real_map[j])
+	{
+		j++;
+		map->real_map[j] = get_next_line(opened);
+	}
+	map->real_map[j] = NULL;
+	return (map->real_map);
+}
+
+void	ft_freemap(char **tmp_map)
 {
         int i;
 
-	while (map[i])
+	while (tmp_map[i])
 	{
-		free(map[i]);
+		free(tmp_map[i]);
         i++;
 	}
-    free(map);
+    free(tmp_map);
     exit(0);
 }
 
-void    ft_checkmap(char **map_tmp, t_dim dim)
+void    ft_checkmap(char **tmp_map, t_dim dim)
 {
-	if (ft_checkpec(map_tmp) != 1)
+	if (ft_checkpec(tmp_map) != 1)
 		{
-			ft_freemap(map_tmp);
+			ft_freemap(tmp_map);
 			exit (0);
 		}
-	else if (ft_checkwallx(map_tmp, dim.height) != 1)
+	else if (ft_checkwallx(tmp_map, dim.height) != 1)
 		{
-			ft_freemap(map_tmp);
+			ft_freemap(tmp_map);
 			exit (0);
 		}
-	else if (ft_checkwally(map_tmp, dim.width) != 1)
+	else if (ft_checkwally(tmp_map, dim.width) != 1)
 		{
-			ft_freemap(map_tmp);
+			ft_freemap(tmp_map);
 			exit (0);
 		}
-	else if (ft_checkrec(map_tmp, dim.height) != 1)
+	else if (ft_checkrec(tmp_map, dim.height) != 1)
 		{
-			ft_freemap(map_tmp);
+			ft_freemap(tmp_map);
 			exit (0);
 		}
 }

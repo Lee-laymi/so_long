@@ -6,7 +6,7 @@
 #    By: ami <ami@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/22 22:55:16 by skrairab          #+#    #+#              #
-#    Updated: 2022/12/15 21:38:12 by ami              ###   ########.fr        #
+#    Updated: 2022/12/18 16:52:51 by ami              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ OBJS = $(SRCS:.c=.o)
 
 CC = gcc
 
-CC_FLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 LIBDIR = ./Libfts
 
@@ -38,7 +38,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	make -C $(LIBDIR)
 	make -C $(LIBPRINTF)
-	$(CC) -g $(CC_FLAGS) $(OBJS) -o $(NAME) $(INCLUDE)
+	$(CC) -g $(CFLAGS) $(OBJS) -o $(NAME) $(INCLUDE)
 
 
 clean:

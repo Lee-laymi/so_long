@@ -6,7 +6,7 @@
 /*   By: ami <ami@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 14:00:37 by skrairab          #+#    #+#             */
-/*   Updated: 2022/12/16 19:48:13 by ami              ###   ########.fr       */
+/*   Updated: 2022/12/18 18:39:09 by ami              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_map
 {
     char    *path;
     char    **real_map;
-    char    **map;
+    char    **tmp_map;
     
 }               t_map;
 
@@ -39,19 +39,28 @@ typedef struct s_dim
     int     py;
 }               t_dim;
 
+// typedef struct s_program
+// {
+//     t_dim   dime;
+//     t_map   map;
+// }
+
 int	    ft_opened(char *av);
 int		ft_countpec(char **arr, int mode);
 int		ft_checkwallx(char **arr, int i);
 int		ft_checkwally(char **arr, int i);
 int		ft_checkrec(char **arr, int i);
 int		ft_lenx(char *str);
-char	**ft_createmap(char **av, t_map *map);
-int		ft_floodfill(char **arr, int x, int y);
+char	**ft_create_tmpmap(char **av, t_map *map);
+int	    ft_floodfill(t_map *map, int x, int y);
 void	ft_check_ac(int ac, char **av);
-void	ft_freemap(char **map);
-int	    ft_checkpec(char **map_tmp);
-void    ft_checkmap(char **map_tmp, t_dim dim);
-int	    ft_findp(char **map_tmp, t_dim *pos);
-int     ft_getposp(char **arr);
+void	ft_freemap(char **tmp_map);
+int	    ft_checkpec(char **tmp_map);
+void    ft_checkmap(char **tmp_map, t_dim dim);
+int	    ft_findp(char **tmp_map, t_dim *pos);
+int     ft_floodfillmap(t_map *map);
+char	**ft_create_realmap(char **av, t_map *map);
+void	ft_initmap(t_map map);
+void	ft_initdim(t_dim dim);
 
 #endif
