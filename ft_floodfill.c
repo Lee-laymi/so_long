@@ -6,18 +6,19 @@
 /*   By: ami <ami@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 23:20:35 by skrairab          #+#    #+#             */
-/*   Updated: 2022/12/18 17:33:13 by ami              ###   ########.fr       */
+/*   Updated: 2022/12/22 16:59:42 by ami              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	ft_floodfill(t_map *map, int x, int y)
+int	ft_floodfill(t_map map, int x, int y)
 {
 	t_dim	dim;
 	
-	dim.height = ft_opened(av[1]);
-	dim.width = ft_opened(av[1]);
+	dim.height = ft_opened(map);
+	printf("dim.height == %d\n", dim.height)
+	dim.width = ft_opened(map);
 	if ((x < 0 || y < 0) || (x >= dim.width || y >= dim.height))
 	if (map->tmp_map[x][y] == '0' || map->tmp_map[x][y] == 'C' || map->tmp_map[x][y] == 'W')
 		map->tmp_map[x][y] = 'W';

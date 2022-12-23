@@ -6,7 +6,7 @@
 /*   By: ami <ami@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 17:00:21 by ami               #+#    #+#             */
-/*   Updated: 2022/12/22 23:01:30 by ami              ###   ########.fr       */
+/*   Updated: 2022/12/22 23:00:22 by ami              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,12 @@ int main(int ac, char **av)
     ft_initmap(map);
     ft_initdim(dim);
     ft_create_tmpmap(av, &map);
+    ft_create_realmap(av, &map);
+    //ft_checkwallx(&map,lastrow);
+    
+    printf("Hello");
+    printf("Hello");
+    printf("Hello");
     while (map.tmp_map[i])
     {
         printf(" %s", map.tmp_map[i]);

@@ -6,22 +6,22 @@
 /*   By: ami <ami@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 15:52:56 by skrairab          #+#    #+#             */
-/*   Updated: 2022/12/18 17:44:47 by ami              ###   ########.fr       */
+/*   Updated: 2022/12/22 17:24:18 by ami              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	ft_checkwallx(t_map map, int lastrow)
+int	ft_checkwallx(t_map *map, int lastrow)
 {
 	int	k;
 	int	lenx;
 
 	k = 0;
-	lenx = ft_lenx(map.tmp_map[0]);
+	lenx = ft_lenx(map->tmp_map[0]);
 	while (k < lenx)
 	{
-		if (map.tmp_map[0][k] != '1')
+		if (map->tmp_map[0][k] != '1')
 		{
 			write(2, "Map have no wall in x-direction%s\n", 31);
 			return (0);
@@ -31,7 +31,7 @@ int	ft_checkwallx(t_map map, int lastrow)
 	k = 0;
 	while (k < lenx)
 	{
-		if (map.tmp_map[lastrow - 1][k] != '1')
+		if (map->tmp_map[lastrow - 1][k] != '1')
 		{
 			write(2, "Map have no wall in x-direction%s\n", 31);
 			return (0);
@@ -41,16 +41,16 @@ int	ft_checkwallx(t_map map, int lastrow)
 	return (1);
 }
 
-int	ft_checkwally(t_map map, int lastcolumn)
+int	ft_checkwally(t_map *map, int lastcolumn)
 {
 	int		j;
 	int		lenx;
 
 	j = 0;
-	lenx = ft_lenx(map.tmp_map[0]);
+	lenx = ft_lenx(map->tmp_map[0]);
 	while (j < lastcolumn)
 	{
-		if (map.tmp_map[j][0] != '1')
+		if (map->tmp_map[j][0] != '1')
 		{
 			write(2, "Map have no wall in y-direction%s\n", 31);
 			return (0);
@@ -60,7 +60,7 @@ int	ft_checkwally(t_map map, int lastcolumn)
 	j = 0;
 	while (j < lastcolumn)
 	{
-		if (map.tmp_map[j][lenx - 1] != '1')
+		if (map->tmp_map[j][lenx - 1] != '1')
 		{
 			write(2, "Map have no wall in y-direction%s\n", 31);
 			return (0);
@@ -70,7 +70,7 @@ int	ft_checkwally(t_map map, int lastcolumn)
 	return (1);
 }
 
-int	ft_checkrec(char **arr, int mapheight)
+int	ft_checkrec(t_map *map, int mapheight)
 {
 	int		j;
 	//int		k;
@@ -81,8 +81,8 @@ int	ft_checkrec(char **arr, int mapheight)
 	//k = 0;
 	while (j < mapheight)
 	{
-		tmp = ft_lenx(arr[0]);
-		len_rec = ft_lenx(arr[j]);
+		tmp = ft_lenx(map->tmp_map);
+		len_rec = ft_lenx(map->tmp_map[j]);
 		if (tmp != len_rec)
 		{
 			write(2, "Map is not rectangula%s\n", 22);
